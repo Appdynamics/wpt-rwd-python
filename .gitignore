@@ -1,3 +1,6 @@
+# Output of the python RWD scripts
+*.png
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
