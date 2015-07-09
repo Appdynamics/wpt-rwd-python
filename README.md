@@ -1,21 +1,12 @@
 # Python RWD clients for Webpagetest
 
-This repository contains remote webdriver clients writtent in python and
+This repository contains remote webdriver clients written in python and
 designed to be used in the remote webdriver enabled version of webpagetest
 
 ## Requirements
 Install python dependencies (may require sudo)
 ```sh
 pip install --no-cache-dir -r requirements.txt
-```
-
-Set environment variables with connection parameters to the RWD server
-```sh
-# Example with Sauce Labs
-export RWD_URL="http://%s:%s@ondemand.saucelabs.com:%s/wd/hub"
-export RWD_PORT=80
-export RWD_USERNAME=YOUR_USERNAME
-export RWD_ACCESSKEY=YOUR_ACCESSKEY
 ```
 
 ## Capabilities
@@ -27,12 +18,14 @@ on the WPT agent node chooses the appropriate value
 Other capabilities (resolution, proxy, ...) may need to be supported in the future
 
 ## singleur.py
-Fetch a single URL snapshot, i.e. single measurement, on the AppDynamics Synthetic Monitoring Platform
+Fetch a single URL snapshot, i.e. single measurement.
 
 Usage:
 ```sh
-python singleurl.py -b chrome -s /path/to/screenshot.png http://ibm.com
+python singleurl.py --server-url http://user:pass@provider.com:port -b chrome --browser chrome --test-url http://appdynamics.com
 ```
 
 # Copyright
-Copyright (c) 2015 AppDynamics Inc.
+Copyright (c) AppDynamics, Inc, and its affiliates  
+2015  
+All rights reserved.
