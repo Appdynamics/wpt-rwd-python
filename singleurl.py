@@ -26,13 +26,14 @@ parser = argparse.ArgumentParser(description='RWD client for single URL measurem
 
 parser.add_argument('--server-url', required=True)
 parser.add_argument('--test-url', required=True)
-parser.add_argument('--browser', choices=['chrome', 'firefox', 'internet explorer'], required=True)
+parser.add_argument('--browser', choices=['chrome', 'firefox', 'internet explorer', 'ie 10'], required=True)
 parser.add_argument('--screenshot', default='screenshot.png')
 parser.add_argument('--firefox-profile-dir')
 parser.add_argument('browser_args', nargs='*')
 
 args = parser.parse_args()
 
+# browser name normalization to fit the webpagetest location names
 browser = args.browser.lower()
 
 desired_capabilities = None
@@ -40,7 +41,7 @@ if browser == "chrome":
     desired_capabilities = get_chrome_caps(args.browser_args)
 elif browser == "firefox":
     desired_capabilities = get_firefox_caps(args.firefox_profile_dir)
-elif browser == "internet explorer":
+elif browser == "internet explorer" or browser == "ie 10":
     desired_capabilities = get_internetexplorer_caps()
 else:
     raise UnSupportedBrowser(browser);
