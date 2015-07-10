@@ -24,9 +24,12 @@ def get_internetexplorer_caps():
 
 parser = argparse.ArgumentParser(description='RWD client for single URL measurements')
 
+ie_browsers = [ 'ie 10', 'ie 11' ]
+browsers =  ['chrome', 'firefox', 'internet explorer'] + ie_browsers
+
 parser.add_argument('--server-url', required=True)
 parser.add_argument('--test-url', required=True)
-parser.add_argument('--browser', choices=['chrome', 'firefox', 'internet explorer', 'ie 10'], required=True)
+parser.add_argument('--browser', choices=browsers, required=True)
 parser.add_argument('--screenshot', default='screenshot.png')
 parser.add_argument('--firefox-profile-dir')
 parser.add_argument('browser_args', nargs='*')
@@ -41,7 +44,7 @@ if browser == "chrome":
     desired_capabilities = get_chrome_caps(args.browser_args)
 elif browser == "firefox":
     desired_capabilities = get_firefox_caps(args.firefox_profile_dir)
-elif browser == "internet explorer" or browser == "ie 10":
+elif browser in ie_browsers:
     desired_capabilities = get_internetexplorer_caps()
 else:
     raise UnSupportedBrowser(browser);
