@@ -46,6 +46,7 @@ elif browser == "firefox":
     desired_capabilities = get_firefox_caps(args.firefox_profile_dir)
 elif browser in ie_browsers:
     desired_capabilities = get_internetexplorer_caps()
+    desired_capabilities['initialBrowserUrl'] = 'about:blank'
 else:
     raise UnSupportedBrowser(browser);
 
