@@ -15,7 +15,6 @@ def get_chrome_caps(browser_args):
     
 def get_firefox_caps(profile_dir):
     firefox_capabilities = DesiredCapabilities.FIREFOX.copy()
-    # XXX this is probably not what we need
     if (profile_dir):
         firefox_capabilities['firefox_profile_dir'] = profile_dir
     return firefox_capabilities
@@ -47,7 +46,7 @@ else:
     raise UnSupportedBrowser(browser);
 
 desired_capabilities['name'] = 'Single URL snapshot: %s' % args.test_url
-desired_capabilities['lockStep'] = "true"
+desired_capabilities['wptLockStep'] = "true"
 
 print("Connecting to RWD server: " + args.server_url)
 driver = webdriver.Remote(desired_capabilities=desired_capabilities,
