@@ -15,6 +15,7 @@ driver = webdriver.Remote(desired_capabilities=desired_capabilities,
 
 execfile(args.path, globals(), {driver: driver});
 
-# quit only if necessary
-driver.quit()
-print("Done.")
+try:
+    driver.quit()
+except Exception, e:
+    pass
