@@ -25,7 +25,22 @@ Usage:
 python singleurl.py --server-url http://user:pass@provider.com:port -b chrome --browser chrome --test-url http://appdynamics.com
 ```
 
+## runscript.py
+Execute a python selenium script passed as an argument. The script will have
+the `driver` object in it's local scope.
+
+Example of script:
+```python
+driver.get('http://appdynamics.com')
+driver.quit();
+```
+
+Usage:
+```sh
+python runscript.py --server-url http://user:pass@provider.com:port -b chrome --browser chrome --path ~/tmp/my_script.py
+```
+
 # Copyright
-Copyright (c) AppDynamics, Inc, and its affiliates  
-2015  
+Copyright (c) AppDynamics, Inc, and its affiliates
+2015
 All rights reserved.
