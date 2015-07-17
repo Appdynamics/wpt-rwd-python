@@ -37,6 +37,11 @@ globalScope['__name__'] = 'script';
 
 localScope = {driver: driver}
 
+# with lock step, 'get' can take more time then a usual RWD call.
+# Setting page load timeout to a negative value will wait forever for the page to
+# load without throwing an exception
+driver.set_page_load_timeout(-1);
+
 try:
     execfile(args.path, globalScope, localScope);
 except Exception as e:
