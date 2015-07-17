@@ -29,10 +29,34 @@ python singleurl.py --server-url http://user:pass@provider.com:port -b chrome --
 Execute a python selenium script passed as an argument. The script will have
 the `driver` object in it's local scope.
 
-Example of script:
+A script can be a free form python script like:
 ```python
 driver.get('http://appdynamics.com')
 driver.quit();
+```
+
+Or one or more TestCase classes (from unittest). In this case, runscript will act as a
+test runner and will output a verbose text result on the stdout and generate an
+XML report (JUnit) per TestCase in `./reports`. A typical TestCase would look
+like:
+
+```python
+import unittest
+
+class TestStringMethods(unittest.TestCase):
+  def setUp(self):
+      # do the Selenium navigation here
+      driver.get('http://appdynamics.com')
+
+  def test_banner_on_page(self):
+      self.assertTrue(driver... )
+
+  def test_check_data(self):
+      # more tests
+      pass
+
+if __name__ == '__main__':
+    unittest.main()
 ```
 
 Usage:

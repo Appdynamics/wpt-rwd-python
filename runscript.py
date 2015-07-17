@@ -1,5 +1,6 @@
 import sys
 import unittest
+import xmlrunner
 import inspect
 from module.cliparser import build_parser
 from module.buildcap import build_capabilities
@@ -14,6 +15,10 @@ ret = PASSED
 
 parser = build_parser('RWD client for running a script');
 parser.add_argument('--path', required=True)
+
+parser.add_argument('--xml', dest='xml', action='store_true')
+parser.add_argument('--no-xml', dest='xml', action='store_false')
+parser.set_defaults(xml=True)
 args = parser.parse_args()
 
 desired_capabilities = build_capabilities(args)
@@ -50,7 +55,11 @@ for item in localScope.itervalues():
 
 # If a suite was defined, run it
 if (testSuite.countTestCases() > 0):
-    testRunner = unittest.TextTestRunner(verbosity=2)
+    if args.xml:
+        testRunner = xmlrunner.XMLTestRunner(verbosity=2, output='reports')
+    else:
+        testRunner = unittest.TextTestRunner(verbosity=2)
+
     results = testRunner.run(testSuite)
     if len(results.failures) > 0:
         ret = FAILED
