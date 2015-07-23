@@ -1,6 +1,14 @@
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
+ie_browsers = [ 'ie 10', 'ie 11' ]
+browsers =  ['chrome', 'firefox', 'internet explorer'] + ie_browsers
+
+class UnSupportedBrowser(Exception):
+    def __init__(self, message):
+        super(Exception, self).__init__(message)
+        self.message = 'Unsupported browser %s' % message
+
 def get_chrome_caps(browser_args):
     chrome_options = Options()
     if browser_args:
@@ -32,6 +40,7 @@ def build_capabilities(args):
         raise UnSupportedBrowser(browser);
 
     desired_capabilities['wptLockStep'] = "true"
+    desired_capabilities['name'] = '%s' % args.id
 
     return desired_capabilities;
 

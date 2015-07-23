@@ -17,15 +17,15 @@ on the WPT agent node chooses the appropriate value
 
 Other capabilities (resolution, proxy, ...) may need to be supported in the future
 
-## singleur.py
+## Measure a single URL
 Fetch a single URL snapshot, i.e. single measurement.
 
 Usage:
 ```sh
-python singleurl.py --server-url http://user:pass@provider.com:port -b chrome --browser chrome --test-url http://appdynamics.com
+python rwdclient.py --server-url http://user:pass@provider.com:port -b chrome --browser chrome --test-url http://appdynamics.com
 ```
 
-## runscript.py
+## Run a script
 Execute a python selenium script passed as an argument. The script will have
 the `driver` object in it's local scope.
 
@@ -61,7 +61,7 @@ if __name__ == '__main__':
 
 Usage:
 ```sh
-python runscript.py --server-url http://user:pass@provider.com:port -b chrome --browser chrome --path ~/tmp/my_script.py
+python rwdclient.py --server-url http://user:pass@provider.com:port -b chrome --browser chrome --filepath ~/tmp/my_script.py
 ```
 
 # Copyright
