@@ -61,7 +61,7 @@ if __name__ == '__main__':
 
 Usage:
 ```sh
-python rwdclient.py --server-url http://user:pass@provider.com:port -b chrome --browser chrome --filepath ~/tmp/my_script.py
+python rwdclient.py --server-url http://user:pass@provider.com:port -b chrome --browser chrome --test-script ~/tmp/my_script.py
 ```
 
 # Copyright

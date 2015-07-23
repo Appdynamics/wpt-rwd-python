@@ -1,4 +1,5 @@
 import sys
+import os
 import unittest
 import xmlrunner
 import inspect
@@ -17,10 +18,13 @@ args = parse()
 
 desired_capabilities = build_capabilities(args)
 
+if (args.test_script and not(os.path.exists(args.test_script))):
+    print "Error, file %s does not exist" % (args.test_script)
+    sys.exit(SCRIPT_ERROR);
+
 print("Connecting to RWD server: " + args.server_url)
 driver = webdriver.Remote(desired_capabilities=desired_capabilities,
                           command_executor=args.server_url)
-
 
 # with lock step, 'get' can take more time then a usual RWD call.
 # Setting page load timeout to a negative value will wait forever for the page to
@@ -42,7 +46,7 @@ else:
     scriptScope = {'driver': driver, 'testSuite': testSuite}
 
     try:
-        execfile(args.filepath, scriptScope, scriptScope);
+        execfile(args.test_script, scriptScope, scriptScope);
     except Exception as e:
         print str(e)
         if (isinstance(e, AssertionError)):

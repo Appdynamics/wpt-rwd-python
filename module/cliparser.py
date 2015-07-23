@@ -16,7 +16,7 @@ def parse():
 
     group = parser.add_mutually_exclusive_group(required=True)
     # path where the user script is located
-    group.add_argument('--filepath')
+    group.add_argument('--test-script')
     # or URL to load for RWD client for single URL measurements
     group.add_argument('--test-url')
 
