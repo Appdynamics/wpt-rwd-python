@@ -38,15 +38,11 @@ else:
     # reset args list to have a pristine environment to execute the script
     sys.argv = ['test'];
 
-    # For Unit Tests: script should not consider itself as main in order to prevent 
-    # the provided script to run the testrunner by itself.
-    globalScope = globals().copy();
-    globalScope['__name__'] = 'script';
-
-    localScope = {'driver': driver}
+    testSuite = unittest.TestSuite()
+    scriptScope = {'driver': driver, 'testSuite': testSuite}
 
     try:
-        execfile(args.filepath, globalScope, localScope);
+        execfile(args.filepath, scriptScope, scriptScope);
     except Exception as e:
         print str(e)
         if (isinstance(e, AssertionError)):
@@ -56,8 +52,7 @@ else:
             ret = SCRIPT_ERROR
 
     # automatically load all test classes to feed in test runner
-    testSuite = unittest.TestSuite()
-    for item in localScope.itervalues():
+    for item in scriptScope.itervalues():
         if (inspect.isclass(item) and issubclass(item, unittest.TestCase)):
             testSuite.addTest(unittest.TestLoader().loadTestsFromTestCase(item))
 
