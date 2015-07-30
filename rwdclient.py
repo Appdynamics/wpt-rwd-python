@@ -1,8 +1,5 @@
 import sys
 import os
-import unittest
-import xmlrunner
-import inspect
 from module.cliparser import parse
 from module.buildcap import build_capabilities
 from selenium import webdriver
@@ -43,8 +40,7 @@ else:
     # reset args list to have a pristine environment to execute the script
     sys.argv = ['test']
 
-    testSuite = unittest.TestSuite()
-    scriptScope = {'driver': driver, 'testSuite': testSuite}
+    scriptScope = {'driver': driver}
 
     try:
         execfile(args.test_script, scriptScope, scriptScope)
@@ -55,22 +51,6 @@ else:
             ret = TEST_FAILED
         else:
             ret = SCRIPT_ERROR
-
-    # automatically load all test classes to feed in test runner
-    for item in scriptScope.itervalues():
-        if (inspect.isclass(item) and issubclass(item, unittest.TestCase)):
-            testSuite.addTest(unittest.TestLoader().loadTestsFromTestCase(item))
-
-    # If a suite was defined, run it
-    if (testSuite.countTestCases() > 0):
-        testRunner = xmlrunner.XMLTestRunner(verbosity=2, output='reports')
-
-        results = testRunner.run(testSuite)
-        if len(results.failures) > 0:
-            ret = TEST_FAILED
-        elif len(results.errors) > 0:
-            ret = SCRIPT_ERROR
-
 
 # quit but don't report errors. The browser might be already closed.
 try:
